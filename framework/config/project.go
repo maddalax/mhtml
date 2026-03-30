@@ -10,6 +10,7 @@ import (
 
 type ProjectConfig struct {
 	Tailwind                      bool     `yaml:"tailwind"`
+	TailwindVersion               string   `yaml:"tailwind_version"`
 	WatchIgnore                   []string `yaml:"watch_ignore"`
 	WatchFiles                    []string `yaml:"watch_files"`
 	AutomaticPageRoutingIgnore    []string `yaml:"automatic_page_routing_ignore"`

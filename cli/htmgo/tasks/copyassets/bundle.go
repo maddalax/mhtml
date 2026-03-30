@@ -3,6 +3,7 @@ package copyassets
 import (
 	"fmt"
 	"github.com/maddalax/htmgo/cli/htmgo/internal/dirutil"
+	"github.com/maddalax/htmgo/cli/htmgo/internal/tailwind"
 	"github.com/maddalax/htmgo/cli/htmgo/tasks/module"
 	"github.com/maddalax/htmgo/cli/htmgo/tasks/process"
 	"golang.org/x/mod/modfile"
@@ -92,11 +93,14 @@ func CopyAssets() {
 			})
 	}
 
-	if dirutil.GetConfig().Tailwind && !dirutil.HasFileFromRoot("tailwind.config.js") {
-		err = dirutil.CopyFile(
-			filepath.Join(assetCssDir, "tailwind.config.js"),
-			filepath.Join(process.GetWorkingDir(), "tailwind.config.js"),
-		)
+	cfg := dirutil.GetConfig()
+	if cfg.Tailwind && !dirutil.HasFileFromRoot("tailwind.config.js") {
+		if !tailwind.IsV4(tailwind.DetectTailwindVersion(cfg.TailwindVersion, process.GetWorkingDir())) {
+			err = dirutil.CopyFile(
+				filepath.Join(assetCssDir, "tailwind.config.js"),
+				filepath.Join(process.GetWorkingDir(), "tailwind.config.js"),
+			)
+		}
 	}
 
 	if err != nil {

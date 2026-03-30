@@ -88,10 +88,30 @@ func TestConfigGet(t *testing.T) {
 	assert.Equal(t, "/public", cfg.PublicAssetPath)
 }
 
+func TestTailwindVersionDefault(t *testing.T) {
+	t.Parallel()
+	cfg := DefaultProjectConfig()
+	assert.Equal(t, "", cfg.TailwindVersion)
+}
+
+func TestTailwindVersionFromConfig(t *testing.T) {
+	t.Parallel()
+	dir := writeConfigFile(t, "tailwind: true\ntailwind_version: v3.4.16")
+	cfg := FromConfigFile(dir)
+	assert.Equal(t, "v3.4.16", cfg.TailwindVersion)
+}
+
+func TestTailwindVersionLatest(t *testing.T) {
+	t.Parallel()
+	dir := writeConfigFile(t, "tailwind: true\ntailwind_version: latest")
+	cfg := FromConfigFile(dir)
+	assert.Equal(t, "latest", cfg.TailwindVersion)
+}
+
 func writeConfigFile(t *testing.T, content string) string {
-	temp := os.TempDir()
-	os.Mkdir(temp, 0755)
-	err := os.WriteFile(path.Join(temp, "htmgo.yml"), []byte(content), 0644)
+	t.Helper()
+	dir := t.TempDir()
+	err := os.WriteFile(path.Join(dir, "htmgo.yml"), []byte(content), 0644)
 	assert.Nil(t, err)
-	return temp
+	return dir
 }

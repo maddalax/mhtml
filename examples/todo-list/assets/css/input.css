@@ -1,3 +1,23 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+    --color-background: hsl(224, 71.4%, 4.1%);
+    --color-foreground: hsl(0, 0%, 89%);
+    --color-card: hsl(224, 71.4%, 4.1%);
+    --color-card-foreground: hsl(0, 0%, 89%);
+    --color-popover: hsl(224, 71.4%, 4.1%);
+    --color-popover-foreground: hsl(0, 0%, 89%);
+    --color-primary: hsl(0, 0%, 89%);
+    --color-primary-foreground: hsl(220.9, 39.3%, 11%);
+    --color-secondary: hsl(215, 27.9%, 16.9%);
+    --color-secondary-foreground: hsl(0, 0%, 89%);
+    --color-muted: hsl(215, 27.9%, 16.9%);
+    --color-muted-foreground: hsl(217.9, 10.6%, 64.9%);
+    --color-accent: hsl(215, 27.9%, 16.9%);
+    --color-accent-foreground: hsl(0, 0%, 89%);
+    --color-destructive: hsl(0, 62.8%, 30.6%);
+    --color-destructive-foreground: hsl(0, 0%, 89%);
+    --color-border: hsl(215, 27.9%, 16.9%);
+    --color-input: hsl(215, 27.9%, 16.9%);
+    --color-ring: hsl(216, 12.2%, 83.9%);
+}
